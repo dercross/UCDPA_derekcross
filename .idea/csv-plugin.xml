@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\manufacturing_rejects2.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\merge_dataframes.py">
           <value>
             <Attribute>

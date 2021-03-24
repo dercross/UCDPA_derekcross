@@ -5,6 +5,7 @@ names = ['United States', 'Australia', 'Japan', 'India', 'Russia', 'Morocco', 'E
 dr =  [True, False, False, False, True, True, True]
 cpc = [809, 731, 588, 18, 200, 70, 45]
 cars_dict = { 'country':names, 'drives_right':dr, 'cars_per_cap':cpc }
+#Saving Dictionary in to Pandas dataframe to variable "cars"
 cars = pd.DataFrame(cars_dict)
 print(cars)
 

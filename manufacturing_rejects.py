@@ -40,20 +40,19 @@ def clean_data():
 #Clean data fill blanks with "NA"
     cleaned_data = data.fillna("NA")
 #In this dataframe I don not need to drop column or rename a column.
-# See python code below on how I would drop or rename column in my Dataframe
+# Python code below on how I would drop or rename column in my Dataframe
 #drop column Station to show can drop a Column in a dataframe
     #cleaned_data = data.drop(['Station'], axis=1)
 #Rename Column Part_Category to Category
     #data.rename(columns={'Part_Category': 'Category'})
-
     return cleaned_data
 
 def sort_data():
     data = clean_data()
 #Using index Set first column to dates
     data.set_index("TIME", inplace=True)
-#sort column Date of Sale  by ascending order
-    data.sort_values(["TIME"], ascending=[True])
+#sort column TIME by ascending order
+    data.sort_values(by="TIME", ascending=True)
     return data
 
 #Call clean data function.
@@ -64,7 +63,7 @@ clean_data()
 # #print(data.head(5), data.shape)
 # # Call Sort data
 
-#Called sorted_data function of the data_frame.
+#Sorted_data function of the data_frame.
 data = (sort_data())
 
 # #print the top few rows.
@@ -72,8 +71,8 @@ data = (sort_data())
 
 
 # #Analysing data and charts:
-#
-# Count the Category rejects and ouput charts.
+#####################################################################################
+# Count the Category rejects and output charts.
 # Charts using import seaborn as sns
 
 
@@ -92,13 +91,12 @@ plt.title("Total count of rejects by part in the month (Feb2021)", fontsize=18, 
 plt.show()
 
 
-
 #Chart1
 #Count the Rejects per Circuit & Cell and Graph results using Seaborn.
 g= sns.catplot(y="Part_Group", data =data,kind="count", palette="Set2", height=5,aspect=1.5, legend=False)
 ax = plt.gca()
 ax.set_facecolor('xkcd:pale blue')
-ax.legend(['Part_Group'])
+# ax.legend(['Part_Group'])
 # Change seaborn plot size
 fig = plt.gcf()
 # Change seaborn plot size
@@ -133,6 +131,7 @@ plt.title("Total count of rejects by Circuit & Cell in the month (Feb2021)")
 plt.xlabel("Count of Rejects", size=12)
 plt.ylabel("Circuit & Cell", size=12)
 #plt.legend(loc="upper left", bbox_to_anchor=(1,1))
+#plt.savefig("Circuit & Cell.png")
 plt.show()
 
 #Chart3
@@ -153,6 +152,7 @@ plt.title("Total count of rejects by Station in the month (Feb2021)", size=16)
 plt.xlabel("Count of Rejects", size=12)
 plt.ylabel("Station", size=12)
 #plt.legend(loc="upper left", bbox_to_anchor=(1,1))
+#plt.savefig("Station.png")
 plt.show()
 
 #Chart4
@@ -174,8 +174,8 @@ plt.title("Total count of rejects by Failure Description (Feb2021)", loc='center
 plt.xlabel("Count of Rejects", size=12)
 plt.ylabel("Failure Description", size=12)
 #plt.legend(loc="upper left", bbox_to_anchor=(1,1))
+#plt.savefig("Failure Description.png")
 plt.show()
-
 
 #Chart5
 #Count the Rejects per Operation and Graph results using Seaborn.
@@ -194,11 +194,11 @@ plt.title("Total count of rejects by Operation (Feb2021)",loc='center', size=11)
 plt.xlabel("Count of Rejects", size=12)
 plt.ylabel("Operation", size=12)
 #plt.legend(loc="upper left", bbox_to_anchor=(1,1))
+#plt.savefig("Operation.png")
 plt.show()
 
-
-
-
+#Chart 6
+#Joint plot to analysis Part_Group by Circuit & Cell.
 sns.jointplot(x='Part_Group', y='Circuit & Cell', data=data)
 ax = plt.gca()
 # # Change seaborn plot size
@@ -210,8 +210,10 @@ g.set_xticklabels(rotation=90)
 #plt.title("Total count of rejects part_group by Circuit& Cell",loc='center', size=11)
 plt.legend(['Count of Rejects'])
 plt.legend(loc="upper left", bbox_to_anchor=(1,1))
+#plt.savefig("Part_Group_Circuit & Cell.png")
 plt.show()
 
+#ADDTIONAL ANALYSIS BASED ON REQUIREMENTS DECIDE NOT USED.
 # sns.jointplot(x='Circuit & Cell', y='Part_Group', data=data)
 # ax = plt.gca()
 # # # Change seaborn plot size
@@ -251,14 +253,38 @@ plt.show()
 # plt.legend(loc="upper left", bbox_to_anchor=(1,1))
 # plt.show()
 
-
-
+#Groupby - Grouping values in Pandas Dataframe
+#In which Part_Group", "Circuit & Cell are the column is used to create the groups and the value_column "Part_Category" is the column
+# that will be summarized for each group.
 
 data.groupby(["Part_Group", "Circuit & Cell"], as_index=False)["Part_Category"].count()
 print(data)
+##############################################################################
+# Slicing used for analyising data.
 
-# Slicing
-# Example code to show to when selecting "fetching data" pandas data using “iloc”
+# Python code in Slicing Subsets of Rows in my dataframe
+# syntax: data[start:stop]
+# Select rows 0, 1, 2 (row 3 is not selected) from my dataframe.
+data[0:3]
+# print(data[0:3])
+# Select rows 1 to 24 (row 25 is not selected) from my dataframe.
+data[1:25]
+# print(data[1:25])
+# Select the first 5 rows (rows 0, 1, 2, 3, 4)
+data[:5]
+# print(data[:5])
+# Select the last element in the list
+# (the slice starts at the last element, and ends at the end of the dataframe)
+data[-1:]
+# print(data[-1:])
+###################################################################################
+# Slicing Subsets of Rows and Columns in Python
+# iloc integer based indexing
+# Syntax for iloc indexing to finding a specific data element
+# data.iloc[row, column]
+data.iloc[0:3, 1:2]
+# print(data.iloc[0:3, 1:2]
+# Code to show to when selecting "fetching data" pandas data using “iloc”
 # Single selections using iloc and DataFrame
 
 # Rows:
@@ -270,34 +296,33 @@ data.iloc[:,0] # first column of data frame
 data.iloc[:,1] # second column of data frame
 data.iloc[:,-1] # last column of data frame
 # Multiple row and column selections using iloc and DataFrame
-data.iloc[0:5] # first five rows of dataframe
-data.iloc[:, 0:2] # first two columns of data frame with all rows
+data.iloc[0:10] # first ten rows of dataframe
+data.iloc[:, 0:5] # first five columns of data frame with all rows
 
-print(data.iloc[0])
 
-# Example code to show to when selecting pandas data using “Loc”
-# Single selections using loc and DataFrame
+# Slicing with labels loc (labels of your index)
+# TIME/Operation/Failure Description/Station/Circuit & Cell/Part_Group/Part_Category
+# Example slicing with loc
+# Selects all rows Select both columns Circuit & Cell'and 'Part_Group
+data.loc[:,'Circuit & Cell':'Part_Group']
 
-# Previously set_index in the dataframe in the function sort_data():
-# data.set_index("Day", inplace=True)
-#data.loc ['4'] #All the purchases from 04 Jan 2010
-#print(data.loc ['4'])
+# df.loc[row_indexer,column_indexer]
 data.loc[data['Part_Group'] =='Introducer']
+
+#example using loc and list of two of my columns
+data.loc['01/02/2021 08:00':'01/02/2021 10:00', ['Circuit & Cell', 'Part_Group']]
+
+# data_by_part
 data_by_part = data.loc[data['Part_Group'] =='Introducer']
-print(data_by_part)
-#Slicing by dates
-#data.loc["04/01/2010":"07/01/2010"]
-#print (data.loc["04/01/2010":"07/01/2010"])
 
-#Iterating DataFrames with iterrows()
-#Loop over my DataFrame
-#Using for loop to show iterating to get the entire row-data of an index
-#i represents the index column
-# for i, row in data.iterrows():
-# 	print(f"Index: {i}")
-# 	print(f"{row}\n")
+# Code in iterate looping over the rows in my DataFrame
+# Using for loop and iterrow()
+# Example printing out all thats in is in the Failure Description column
+# Any row can be selected.
+for index, row in data.iterrows():
+    print(row['Failure Description'], row['Circuit & Cell'])
 
-#Sample printing out all thats in is in the Failure Description column
-for i, row in data.iterrows():
-    print(row['Failure Description'])
-
+# Code not used
+# Using for loop and iterrow() head index and row.
+# for index, row in data.head().iterrows():
+#     print(index, row)
