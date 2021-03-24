@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2a1babc7-4eb8-4a55-adb8-ea7f3e548e48" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+    <list default="true" id="2a1babc7-4eb8-4a55-adb8-ea7f3e548e48" name="Default Changelist" comment="Derek Cross UCD_Project Final updates.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dictionary.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dictionary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Numpy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manufacturing_rejects.py" beforeDir="false" afterPath="$PROJECT_DIR$/manufacturing_rejects.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/slicing.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,12 +194,20 @@
       <option name="project" value="LOCAL" />
       <updated>1616460318345</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Derek Cross UCD_Project Final updates.">
+      <created>1616547251925</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1616547251925</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Commit Derek Cross UCD_Project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit Derek Cross UCD_Project" />
+    <MESSAGE value="Derek Cross UCD_Project Final updates." />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

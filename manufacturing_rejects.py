@@ -1,15 +1,16 @@
 # Derek Cross
 # Python project code to analysis High Volume medical device manufacturing rejects on Feb 2021 data.
-# I have gather CSV file from Microsoft SQL database and saved to .csv file
-# The goal is to analysis the top reject (Yield hitters) for the manufacturing line.
+# I have gather CSV file from Microsoft SQL database and saved to .csv file (reject_data_feb2021.csv)
+# The goal is to analysis the top reject for the manufacturing line.
 
 
-#import libary.
+#import libaries.
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+#Import fuction to import csv file.
 def csvdata_import(filename):
     data = pd.read_csv(filename)
 # Take first look to understand the dataset.
@@ -20,9 +21,10 @@ def csvdata_import(filename):
     return data
 
 def missing_data():
+#Missing data function
+
 # Call import CSV file load to dataframe  importing. display data shape, info, description.
 # csvdata_import(). no need to call function as used in missing data function
-
     data = csvdata_import("reject_data_feb2021.csv")
 # Adding.sum to show how many missing data in my data set there are none.
     missing_values = data.isnull().sum()
@@ -30,7 +32,7 @@ def missing_data():
 (missing_data())
 
 def clean_data():
-# Clean all missing data
+# Clean all missing data function
 # descriptive data to fill with NA as not required for analysis.
 # Decided to use fillna("NA") as best fit to clean the data.
 
@@ -48,6 +50,7 @@ def clean_data():
     return cleaned_data
 
 def sort_data():
+#Sort Missing Data Function
     data = clean_data()
 #Using index Set first column to dates
     data.set_index("TIME", inplace=True)
@@ -70,9 +73,9 @@ data = (sort_data())
 # print(data.head(5), data.shape, data.info)
 
 
-# #Analysing data and charts:
+# Analysing data and generate charts:
 #####################################################################################
-# Count the Category rejects and output charts.
+# Count the Category rejects separately  and output charts.
 # Charts using import seaborn as sns
 
 
@@ -95,6 +98,7 @@ plt.show()
 #Count the Rejects per Circuit & Cell and Graph results using Seaborn.
 g= sns.catplot(y="Part_Group", data =data,kind="count", palette="Set2", height=5,aspect=1.5, legend=False)
 ax = plt.gca()
+#Setting face colour.
 ax.set_facecolor('xkcd:pale blue')
 # ax.legend(['Part_Group'])
 # Change seaborn plot size
@@ -117,6 +121,7 @@ plt.show()
 #Count the Rejects per Circuit & Cell and Graph results using Seaborn.
 g= sns.catplot(y="Circuit & Cell", data =data,kind="count", palette="Set2")
 ax = plt.gca()
+#Setting face colour.
 ax.set_facecolor('xkcd:pale blue')
 # Change seaborn plot size
 fig = plt.gcf()
@@ -138,6 +143,7 @@ plt.show()
 #Count the Rejects per Station and Graph results using Seaborn.
 g= sns.catplot(y="Station", data =data,kind="count", palette="Set2")
 ax = plt.gca()
+#Setting face colour.
 ax.set_facecolor('xkcd:pale blue')
 # Change seaborn plot size
 fig = plt.gcf()
@@ -159,6 +165,7 @@ plt.show()
 #Count the Rejects for Failure description and Graph results using Seaborn.
 g= sns.catplot(y="Failure Description", data =data,kind="count", palette="Set2")
 ax = plt.gca()
+#Setting face colour.
 ax.set_facecolor('xkcd:pale blue')
 # Change seaborn plot size
 fig = plt.gcf()
@@ -181,6 +188,7 @@ plt.show()
 #Count the Rejects per Operation and Graph results using Seaborn.
 g= sns.catplot(y="Operation", data =data,kind="count", palette="Set2")
 ax = plt.gca()
+#Setting face colour.
 ax.set_facecolor('xkcd:pale blue')
 # Change seaborn plot size
 fig = plt.gcf()
@@ -201,7 +209,6 @@ plt.show()
 #Joint plot to analysis Part_Group by Circuit & Cell.
 sns.jointplot(x='Part_Group', y='Circuit & Cell', data=data)
 ax = plt.gca()
-# # Change seaborn plot size
 fig = plt.gcf()
 # # Change seaborn plot size
 fig.set_size_inches(12, 12)
@@ -260,7 +267,7 @@ plt.show()
 data.groupby(["Part_Group", "Circuit & Cell"], as_index=False)["Part_Category"].count()
 print(data)
 ##############################################################################
-# Slicing used for analyising data.
+# Slicing used for analyzing  data.
 
 # Python code in Slicing Subsets of Rows in my dataframe
 # syntax: data[start:stop]
@@ -310,15 +317,15 @@ data.loc[:,'Circuit & Cell':'Part_Group']
 data.loc[data['Part_Group'] =='Introducer']
 
 #example using loc and list of two of my columns
-data.loc['01/02/2021 08:00':'01/02/2021 10:00', ['Circuit & Cell', 'Part_Group']]
+#data.loc['01/02/2021 08:00':'01/02/2021 10:00', ['Circuit & Cell', 'Part_Group']]
 
 # data_by_part
 data_by_part = data.loc[data['Part_Group'] =='Introducer']
 
 # Code in iterate looping over the rows in my DataFrame
 # Using for loop and iterrow()
-# Example printing out all thats in is in the Failure Description column
-# Any row can be selected.
+# Example printing out all that's in is in the Failure Description column
+# and Circuit & Cell column
 for index, row in data.iterrows():
     print(row['Failure Description'], row['Circuit & Cell'])
 
